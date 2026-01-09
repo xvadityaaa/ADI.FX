@@ -4,29 +4,504 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADI.FX - Video Editor Portfolio</title>
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="style.css">
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Social Media Links */
+        .social-links {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 1001;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, #00ff88, #00ccff);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: #00ff88;
+        }
+
+        /* Hero Section with Animated Background */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 204, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .shape1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #00ff88, #00ccff);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #00ccff, #8a2be2);
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        .shape3 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #ff00ff, #00ff88);
+            top: 60%;
+            left: 60%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #aaa;
+            letter-spacing: 3px;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Background */
+        .section {
+            min-height: 100vh;
+            padding: 5rem 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(180deg, #0a0a0a 0%, #0f0f0f 50%, #0a0a0a 100%);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0, 204, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #00ff88, #00ccff);
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 50px rgba(0, 255, 136, 0.3);
+            border-color: rgba(0, 255, 136, 0.5);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .card-image::before {
+            opacity: 1;
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-description {
+            color: #999;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* About Me Section */
+        .about-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .about-logo {
+            flex: 0 0 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #bbb;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Form */
+        .contact-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            color: #aaa;
+            line-height: 1.8;
+            z-index: 1;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            color: #00ff88;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #00ff88, #00ccff);
+            border: none;
+            border-radius: 10px;
+            color: #0a0a0a;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .footer {
+            padding: 3rem 5%;
+            text-align: center;
+            background: #0a0a0a;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer p {
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .social-links {
+                left: 10px;
+                top: 10px;
+            }
+
+            .social-links a {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            .about-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .about-logo {
+                flex: 0 0 200px;
+                height: 200px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-
     <!-- Social Media Links -->
     <div class="social-links">
-        <a href="https://wa.me/YOUR_WHATSAPP_NUMBER" target="_blank">
+        <a href="https://wa.me/YOUR_WHATSAPP_NUMBER" target="_blank" title="WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank">
+        <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" title="Instagram">
             <i class="fab fa-instagram"></i>
         </a>
-        <a href="mailto:your.email@gmail.com">
+        <a href="mailto:your.email@gmail.com" title="Email">
             <i class="fas fa-envelope"></i>
         </a>
     </div>
 
-    <!-- Header -->
     <header class="header">
         <nav class="nav">
             <a href="#home">HOME</a>
@@ -38,7 +513,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-bg">
             <div class="floating-shapes">
@@ -53,7 +527,6 @@
         </div>
     </section>
 
-    <!-- Podcast Section -->
     <section id="podcast" class="section">
         <h2 class="section-title">Podcast / Simple Style Edit</h2>
         <div class="grid">
@@ -61,15 +534,12 @@
                 <div class="card-image">🎙️</div>
                 <div class="card-content">
                     <h3 class="card-title">Podcast Edit</h3>
-                    <p class="card-description">
-                        Professional podcast editing with clean audio mixing and smooth video transitions.
-                    </p>
+                    <p class="card-description">Professional podcast editing with clean audio mixing, dynamic video cuts, and engaging visual storytelling. Multi-camera production with smooth transitions and animated graphics.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Typography Section -->
     <section id="typography" class="section">
         <h2 class="section-title">Typography Edit</h2>
         <div class="grid">
@@ -77,25 +547,19 @@
                 <div class="card-image">Aa</div>
                 <div class="card-content">
                     <h3 class="card-title">Kinetic Typography</h3>
-                    <p class="card-description">
-                        Dynamic text animations synced with audio.
-                    </p>
+                    <p class="card-description">Dynamic text animations synchronized with voiceover and music. Bringing words to life with elegant motion design and creative letterforms.</p>
                 </div>
             </div>
-
             <div class="card">
                 <div class="card-image">Aa</div>
                 <div class="card-content">
-                    <h3 class="card-title">Title Sequence</h3>
-                    <p class="card-description">
-                        Creative animated titles and text effects.
-                    </p>
+                    <h3 class="card-title">Title Sequence Design</h3>
+                    <p class="card-description">Custom title designs with animated typography. Inspirational quotes and text brought to life with stunning visual effects and smooth transitions.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Motion Section -->
     <section id="motion" class="section">
         <h2 class="section-title">Motion Graphics</h2>
         <div class="grid">
@@ -103,62 +567,54 @@
                 <div class="card-image">🎬</div>
                 <div class="card-content">
                     <h3 class="card-title">Motion Design</h3>
-                    <p class="card-description">
-                        Brand animations and explainer videos.
-                    </p>
+                    <p class="card-description">Sleek brand animations, explainer videos with custom illustrations, and eye-catching motion graphics for social media. Professional logo animations and brand identity motion design.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="section">
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
-            <div class="about-logo">ADI.FX</div>
+            <div class="about-logo">
+                ADI.FX
+            </div>
             <div class="about-text">
-                <p>
-                    I'm a passionate video editor and motion designer creating engaging visual stories.
-                </p>
-                <p>
-                    I specialize in podcast editing, typography animation, and motion graphics.
-                </p>
+                <p>I'm a passionate video editor and motion designer specializing in creating compelling visual stories. With expertise in podcast editing, typography animation, and motion graphics, I bring creativity and technical excellence to every project.</p>
+                <p>My approach combines clean aesthetics with dynamic storytelling, ensuring that each piece of content not only looks stunning but also effectively communicates its message. I believe in the power of visual media to inspire, inform, and engage audiences.</p>
+                <p>Whether it's crafting smooth podcast edits, designing kinetic typography, or creating eye-catching motion graphics, I'm dedicated to delivering high-quality work that exceeds expectations.</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="section">
         <h2 class="section-title">Contact Me</h2>
-
+        <p class="contact-intro">
+            I'd love to hear from you! Whether you have a question, suggestion, or just want to connect, feel free to reach out.
+        </p>
         <form class="contact-form">
             <div class="form-group">
-                <label>Your Name</label>
-                <input type="text" required>
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
             </div>
-
             <div class="form-group">
-                <label>Your Email</label>
-                <input type="email" required>
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required>
             </div>
-
             <div class="form-group">
-                <label>WhatsApp Number</label>
-                <input type="tel" required>
+                <label for="whatsapp">Your WhatsApp Number</label>
+                <input type="tel" id="whatsapp" name="whatsapp" required>
             </div>
-
             <div class="form-group">
-                <label>Message</label>
-                <textarea required></textarea>
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" required></textarea>
             </div>
-
-            <button class="submit-btn">SEND MESSAGE</button>
+            <button type="submit" class="submit-btn">SEND MESSAGE</button>
         </form>
     </section>
 
     <footer class="footer">
         <p>© 2024 ADI.FX - ALL RIGHTS RESERVED</p>
     </footer>
-
 </body>
 </html>
