@@ -165,8 +165,14 @@ section h2::after {
     overflow: hidden;
     transition: all 0.4s;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1.5rem;
+    padding: 0; /* Remove padding for video cards */
+    position: relative; /* Needed for absolute iframe positioning */
 }
+
+.edit.video-card {       /* Optional: add this class for video-only cards */
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
 
 .edit:hover {
     transform: translateY(-15px);
@@ -184,12 +190,18 @@ section h2::after {
     background-clip: text;
 }
 
-.edit iframe {
+.edit iframe,
+.edit video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 300px;
+    height: 100%;
     border: none;
     border-radius: 10px;
 }
+
+
 
 .edit img {
     width: 100%;
