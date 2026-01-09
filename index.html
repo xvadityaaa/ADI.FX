@@ -248,75 +248,156 @@
             border-radius: 2px;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 2rem;
-            z-index: 1;
-        }
+   <!-- Podcast Section -->
+<section id="podcast" class="section">
+    <h2 class="section-title">Podcast / Simple Style Edit</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="card-image">
+                <iframe src="https://drive.google.com/file/d/YOUR_FILE_ID/preview" 
+                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Podcast Edit</h3>
+                <p class="card-description">
+                    Professional podcast editing with clean audio mixing, dynamic video cuts, and engaging visual storytelling. Multi-camera production with smooth transitions and animated graphics.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
-        .card {
-            background: rgba(26, 26, 26, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.4s;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+<!-- Typography Section -->
+<section id="typography" class="section">
+    <h2 class="section-title">Typography Edit</h2>
+    <div class="grid">
+        <!-- Typography Video 1 -->
+        <div class="card">
+            <div class="card-image">
+                <iframe src="https://drive.google.com/file/d/YOUR_FILE_ID/preview" 
+                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Kinetic Typography</h3>
+                <p class="card-description">
+                    Dynamic text animations synchronized with voiceover and music. Bringing words to life with elegant motion design and creative letterforms.
+                </p>
+            </div>
+        </div>
+        <!-- Typography Video 2 -->
+        <div class="card">
+            <div class="card-image">
+                <iframe src="https://drive.google.com/file/d/YOUR_FILE_ID/preview" 
+                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Title Sequence Design</h3>
+                <p class="card-description">
+                    Custom title designs with animated typography. Inspirational quotes and text brought to life with stunning visual effects and smooth transitions.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
-        .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 50px rgba(0, 255, 136, 0.3);
-            border-color: rgba(0, 255, 136, 0.5);
-        }
+<!-- Motion Graphics Section -->
+<section id="motion" class="section">
+    <h2 class="section-title">Motion Graphics</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="card-image">
+                <iframe src="https://drive.google.com/file/d/YOUR_FILE_ID/preview" 
+                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Motion Design</h3>
+                <p class="card-description">
+                    Sleek brand animations, explainer videos with custom illustrations, and eye-catching motion graphics for social media. Professional logo animations and brand identity motion design.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
-        .card-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
+<style>
+.card {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-        .card-image::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 255, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
+.card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 50px rgba(0, 255, 136, 0.3);
+    border-color: rgba(0, 255, 136, 0.5);
+}
 
-        .card:hover .card-image::before {
-            opacity: 1;
-        }
+.card-image {
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    position: relative;
+    background: #1a1a1a;
+    overflow: hidden;
+    border-radius: 15px;
+}
 
-        .card-content {
-            padding: 2rem;
-        }
+.card-image iframe,
+.card-image video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 
-        .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.8rem;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #ffffff, #00ff88);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+.card-image::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 255, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
 
-        .card-description {
-            color: #999;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
+.card:hover .card-image::before {
+    opacity: 1;
+}
+
+.card-content {
+    padding: 2rem;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #ffffff, #00ff88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.card-description {
+    color: #999;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* Grid layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+</style>
+
 
         /* About Me Section */
         .about-content {
